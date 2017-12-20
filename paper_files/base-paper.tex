@@ -1,0 +1,59 @@
+\documentclass[times]{article}
+
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\linespread{1.5}  % 1.5 is good for writing and reviewing
+
+\usepackage{lineno} % for line numbers
+
+\usepackage{booktabs} % To thicken table lines, and use 'toprule'.
+
+\usepackage[numbers,authoryear]{natbib}  % For citet and citep referencing
+\usepackage{graphicx}  % For including figures
+\usepackage{amsmath}  % For using the align environment
+
+\usepackage{tabularx}  % For tabularx environment
+\usepackage{float}  % Used to position floats and lock them (e.g. [H])
+
+\usepackage{multicol}  % Only used if for multi-columns
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, citecolor=gray, linkcolor=blue}
+
+%%% NON-DEFAULT SETTINGS %%%
+%\raggedright % turn on for export to docx
+%\usepackage[nolists]{endfloat}  % moves all floats to end for paper review
+%\usepackage{nopageno}  % turn on for export to docx
+% \linenumbers
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{###FULLNAME###}
+
+\onecolumn
+
+\author{###AUTHOR###}
+\date{\today}
+
+\maketitle
+
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+The start
+
+###EXAMPLEIMAGE###
+
+\section{Conclusion}
+
+\section{Acknowledgements}
+
+\bibliographystyle{plain}
+\bibliography{../../path-to-bibtexfile}
+
+\end{document}
