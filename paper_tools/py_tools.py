@@ -21,3 +21,7 @@ def build_base(base_path, fullname, initials, author=""):
     ofile = open(out_ffp, "w")
     ofile.write(f_str)
     ofile.close()
+    # Add init file
+    out_ffp = outputs_path + "__init__.py"
+    ofile = open(out_ffp, "w")
+    ofile.close()

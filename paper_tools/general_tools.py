@@ -22,7 +22,7 @@ def get_template_ffp(template_name):
     return template_file
 
 
-def add_to_gitignore(initials):
+def add_to_gitignore(base_path, initials):
     # Find gitignore file
     to_ignore = [".idea/",
                  "user_paths.py",
@@ -32,3 +32,6 @@ def add_to_gitignore(initials):
                  "%s_scripts/matplotlibrc" % initials,
                  "*TSWLatexianTemp_*",
                  "%s-paper/%s-paper.pdf" % (initials, initials)]
+    a = open(base_path + ".gitignore", "a")
+    a.write("\n" + "\n".join(to_ignore))
+    a.close()
