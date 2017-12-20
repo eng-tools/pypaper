@@ -6,10 +6,18 @@ def build_base(base_path, fullname, initials, author=""):
     py_path = "%s%s_scripts/" % (base_path, initials)
     gt.build_folder(py_path, "Python")
     # Create images folder and figures folder
-    images_path = "%soutputs/" % py_path
-    gt.build_folder(images_path, "Python outputs")
-    figures_path = "%s%s-figures/" % (py_path, initials)
-    gt.build_folder(figures_path, "Figures")
+    outputs_path = "%soutputs/" % py_path
+    gt.build_folder(outputs_path, "Python outputs")
+    figures_path = "%stemp-output/" % py_path
+    gt.build_folder(figures_path, "Temp output")
 
-    # Copy latex file into location
-    a = open("../paper_files/base-paper.tex")
+    # Copy figure template file into location
+    fname = 'figure_template.py'
+    template_ffp = gt.get_template_ffp(fname)
+    a = open(template_ffp)
+    f_str = a.read()
+    a.close()
+    out_ffp = outputs_path + fname
+    ofile = open(out_ffp, "w")
+    ofile.write(f_str)
+    ofile.close()

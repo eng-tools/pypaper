@@ -1,4 +1,5 @@
 import os
+import paper_tools
 
 
 def build_folder(ffp, name):
@@ -6,6 +7,19 @@ def build_folder(ffp, name):
         os.makedirs(ffp, exist_ok=False)
     except OSError:
         print("%s folder already exists" % name)
+
+
+def build_base(base_path, fullname):
+    # Create folder for latex work
+    paper_path = "%s%s_paper/" % (base_path, fullname)
+    build_folder(paper_path, "Base")
+    return paper_path
+
+
+def get_template_ffp(template_name):
+    templates_dir = os.path.join(os.path.dirname(paper_tools.__file__), 'templates')
+    template_file = os.path.join(templates_dir, template_name)
+    return template_file
 
 
 def add_to_gitignore(initials):

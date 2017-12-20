@@ -8,8 +8,11 @@ from paper_tools import py_tools as pyt
 
 def new_paper(folder_path, title, initials):
     print("building new paper")
-    print(folder_path, title)
-
+    fullname = title + "-paper"
+    print(folder_path, title, initials)
+    base_path = gt.build_base(folder_path, fullname)
+    lt.build_base(base_path, fullname, initials, author="")
+    pyt.build_base(base_path, fullname, initials, author="")
     pass
 
 

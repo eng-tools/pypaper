@@ -1,3 +1,5 @@
+import os
+import paper_tools
 from paper_tools import general_tools as gt
 
 
@@ -13,7 +15,9 @@ def build_base(base_path, fullname, initials, author=""):
     # Copy base .svg file into image folder
 
     # Copy latex file into location
-    a = open("../paper_files/base-paper.tex")
+
+    template_ffp = gt.get_template_ffp('base-paper.tex')
+    a = open(template_ffp)
     f_str = a.read()
     a.close()
     f_str = f_str.replace("###TITLE###", fullname)
