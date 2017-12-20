@@ -29,3 +29,28 @@ def build_base(base_path, fullname, initials, author=""):
     ofile.write(f_str)
     ofile.close()
 
+
+def find_references(fn):
+    """
+    Creates a cite key based on a function, or object or method.
+    :param fn: function, object or method
+    :return:
+    """
+    full_docstring = fn.__doc__
+    ds_lines = full_docstring.split("\n")
+    for line in ds_lines:
+        if ".. [1]" in line:
+            print(line)
+
+
+def find_equations(fn):
+    """
+    Creates a latex equation based on a function, or object or method.
+    :param fn: function, object or method
+    :return:
+    """
+    full_docstring = fn.__doc__
+    ds_lines = full_docstring.split("\n")
+    for line in ds_lines:
+        if ".. math" in line:
+            print(line)
