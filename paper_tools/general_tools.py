@@ -11,7 +11,7 @@ def build_folder(ffp, name):
 
 def build_base(base_path, fullname):
     # Create folder for latex work
-    paper_path = "%s%s_paper/" % (base_path, fullname)
+    paper_path = "%s%s/" % (base_path, fullname)
     build_folder(paper_path, "Base")
     return paper_path
 
