@@ -80,20 +80,20 @@ def combine_bibtex(bibtex_ffp1, bibtex_ffp2):
         # print(entry, bibtex_database.entries_dict[entry])
 
 
-def compile_bibtex(citations, full_bibtex_ffp):
+def compile_bibtex(citations, big_bibtex_ffp):
     """
      finds the bibtex entries that correspond to a list of cite keys,
      from a large bibtex file and writes a new bibtex file
      with just the required references.
      :param citations: a list of citation keys.
-    :param full_bibtex_ffp: full file path to bibtex file
+    :param big_bibtex_ffp: full file path to bibtex file
     :return:
     """
     import copy
 
-    remove_keys = ["annote"]
+    remove_keys = ["annote", "date-added", "date-modified", "local-url", "file", "rating"]
 
-    with open(full_bibtex_ffp) as org_bibtex_file:
+    with open(big_bibtex_ffp) as org_bibtex_file:
         org_bibtex_database = bibtexparser.load(org_bibtex_file)
 
     new_bibtex_db = bibtexparser.loads("")  # create a new bibtex DB obj
@@ -101,8 +101,6 @@ def compile_bibtex(citations, full_bibtex_ffp):
         if entry not in org_bibtex_database.entries_dict:
             print("Not found: ", entry)
         else:
-            print("adding: ", entry)
-
             new_bibtex_db.entries.append(org_bibtex_database.entries_dict[entry])
             # new_bibtex_db.entries_dict[entry['ID']] = org_bibtex_database.entries_dict[entry]
 
@@ -115,12 +113,17 @@ def compile_bibtex(citations, full_bibtex_ffp):
     #         print("adding: ", entry)
     #         new_bibtex_db.entries_dict[entry] = org_bibtex_database.entries_dict[entry]
 
-    print(new_bibtex_db.entries)
+    # print(new_bibtex_db.entries)
+
+    for entry in new_bibtex_db.entries_dict:
+        for r_key in remove_keys:
+            if r_key in new_bibtex_db.entries_dict[entry]:
+                del new_bibtex_db.entries_dict[entry][r_key]
     bibtex_str = bibtexparser.dumps(new_bibtex_db)
     return bibtex_str
 
 
-def extract_citation_keys_from_latex(latex_ffp):
+def extract_citation_keys_from_latex(latex_ffp, chicago=True):
     """
     Reads a latex file and returns a list of cite keys used.
     :param latex_ffp: full file path to latex file
@@ -137,6 +140,12 @@ def extract_citation_keys_from_latex(latex_ffp):
         matches += re.findall('\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         matches += re.findall('\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         matches += re.findall('\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        if chicago:
+            matches += re.findall('\\citeN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall('\\citeNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall('\\shortcite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall('\\shortciteN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall('\\shortciteNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
 
     for m in matches:
         new_cite = m[0]

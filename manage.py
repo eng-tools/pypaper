@@ -22,6 +22,14 @@ def get_script_path():
     return ffp
 
 
+def build_new_bibtex(latex_ffp, big_bibtex_ffp, new_bibtex_ffp='new_bibtex.bib'):
+    citations = lt.extract_citation_keys_from_latex(latex_ffp=latex_ffp)
+    print(citations)
+    bstr = lt.compile_bibtex(citations, big_bibtex_ffp)
+    with open(new_bibtex_ffp, 'w') as bibfile:
+        bibfile.write(bstr)
+
+
 def console_help():
     print("Usage: python manage.py <option> <args>")
     print("Options: new-paper <name>")
@@ -41,11 +49,25 @@ if __name__ == "__main__":
         except IndexError:
             console_help()
             sys.exit(1)
-        if len(sys.argv) > 4:
+        if len(sys.argv) < 4:
             # prompt user
+            initials = "ni"
             pass
         else:
             initials = sys.argv[3]
         new_paper(folder_path, title, initials)
+    if arg1 == "short-bib":
+        try:
+            latex_ffp = sys.argv[2]
+            big_bibtex_ffp = sys.argv[3]
+        except IndexError:
+            console_help()
+            sys.exit(1)
+        if len(sys.argv) < 5:
+            new_bibtex_ffp = 'new_bibtex.bib'
+        else:
+            new_bibtex_ffp = sys.argv[4]
+        build_new_bibtex(latex_ffp, big_bibtex_ffp, new_bibtex_ffp)
+
     else:
         console_help()
