@@ -10,6 +10,7 @@ def build_base(base_path, fullname, initials, author=""):
     gt.build_folder(outputs_path, "Python outputs")
     figures_path = "%stemp-output/" % py_path
     gt.build_folder(figures_path, "Temp output")
+    # TODO: Add toolkit folder, where users can put motion load files and soil profile load files.
 
     # Copy figure template file into location
     fname = 'figure_template.py'

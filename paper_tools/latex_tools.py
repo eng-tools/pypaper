@@ -1,5 +1,6 @@
 import os
 import paper_tools
+import bibtexparser
 from paper_tools import general_tools as gt
 
 
@@ -54,3 +55,103 @@ def find_equations(fn):
     for line in ds_lines:
         if ".. math" in line:
             print(line)
+
+
+def combine_bibtex(bibtex_ffp1, bibtex_ffp2):
+    """
+    Reads a latex file and extracts the cite keys then finds
+     the references in a large bibtex file and writes a new bibtex file
+     with just the required references.
+    :param ffp:
+    :return:
+    """
+
+    with open(bibtex_ffp1) as bibtex_file:
+        bibtex_database = bibtexparser.load(bibtex_file)
+
+    with open(bibtex_ffp2) as org_bibtex_file:
+        org_bibtex_database = bibtexparser.load(org_bibtex_file)
+
+    for entry in bibtex_database.entries_dict:
+        if entry not in org_bibtex_database.entries_dict:
+            print("Not found: ", entry)
+        # else:
+        #     print('found')
+        # print(entry, bibtex_database.entries_dict[entry])
+
+
+def compile_bibtex(citations, full_bibtex_ffp):
+    """
+     finds the bibtex entries that correspond to a list of cite keys,
+     from a large bibtex file and writes a new bibtex file
+     with just the required references.
+     :param citations: a list of citation keys.
+    :param full_bibtex_ffp: full file path to bibtex file
+    :return:
+    """
+    import copy
+
+    remove_keys = ["annote"]
+
+    with open(full_bibtex_ffp) as org_bibtex_file:
+        org_bibtex_database = bibtexparser.load(org_bibtex_file)
+
+    new_bibtex_db = bibtexparser.loads("")  # create a new bibtex DB obj
+    for entry in citations:
+        if entry not in org_bibtex_database.entries_dict:
+            print("Not found: ", entry)
+        else:
+            print("adding: ", entry)
+
+            new_bibtex_db.entries.append(org_bibtex_database.entries_dict[entry])
+            # new_bibtex_db.entries_dict[entry['ID']] = org_bibtex_database.entries_dict[entry]
+
+    # new_bibtex_db = copy.deepcopy(org_bibtex_database)
+    # for entry in org_bibtex_database.entries_dict:
+    #     if entry not in citations:
+    #         print("Not found: ", entry)
+    #         del new_bibtex_db.entries_dict[entry]
+    #     else:
+    #         print("adding: ", entry)
+    #         new_bibtex_db.entries_dict[entry] = org_bibtex_database.entries_dict[entry]
+
+    print(new_bibtex_db.entries)
+    bibtex_str = bibtexparser.dumps(new_bibtex_db)
+    return bibtex_str
+
+
+def extract_citation_keys_from_latex(latex_ffp):
+    """
+    Reads a latex file and returns a list of cite keys used.
+    :param latex_ffp: full file path to latex file
+    :return:
+    """
+    citations = []
+    import regex
+    import re
+    a = open(latex_ffp)
+    lines = a.readlines()
+    matches = []
+    for line in lines:
+
+        matches += re.findall('\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall('\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall('\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+
+    for m in matches:
+        new_cite = m[0]
+        if new_cite not in citations:
+            citations.append(new_cite)
+
+    return citations
+
+
+if __name__ == '__main__':
+    ffp = "../tests/test_data_files/sample_latex.tex"
+    full_bibtex_ffp = "../tests/test_data_files/sample.bib"
+    citations = extract_citation_keys_from_latex(latex_ffp=ffp)
+    print(citations)
+
+    bstr = compile_bibtex(citations, full_bibtex_ffp)
+    print(bstr)
+
