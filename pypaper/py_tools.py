@@ -6,9 +6,9 @@ def add_init_file(folder_path):
     new_file.close()
 
 
-def build_base_folders(base_path, initials):
+def build_base_folders(root_folder_full_path, initials):
     # Create folder for latex work
-    py_path = "%s%s_scripts/" % (base_path, initials)
+    py_path = "%s%s_scripts/" % (root_folder_full_path, initials)
     gt.build_folder(py_path, "Python")
 
     # Create images folder and figures folder

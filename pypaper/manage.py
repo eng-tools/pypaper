@@ -1,19 +1,39 @@
 import os
 import sys
+import os
 
+
+# from pypaper import MIMUMUM_VERSION
+import pypaper
 from pypaper import general_tools as gt
 from pypaper import latex_tools as lt
 from pypaper import py_tools as pyt
 
+__project_pypaper_version__ = "0.2.1"  # version that project was built with
+PROJECT_ROOT_FULL_PATH = os.path.dirname(os.path.abspath(__file__)) + "/"
+PROJECT_NAME = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 
-def new_paper(folder_path, title, initials):
-    print("building new paper")
-    root_folder_name = title + "-paper"
-    print(folder_path, title, initials)
-    base_path = gt.build_base_folders(folder_path, root_folder_name, initials)
-    lt.build_base_folders(base_path, root_folder_name, initials, author="")
-    pyt.build_base_folders(base_path, initials)
-    gt.add_to_gitignore(base_path, initials)
+import sys
+from distutils.version import StrictVersion
+
+if StrictVersion(__project_pypaper_version__) < StrictVersion(pypaper.MINIMUM_VERSION):
+    raise ValueError("project built with incompatible pypaper version: %s; "
+                     "required version: %s; "
+                     "Or install an older version of pypaper." % (__project_pypaper_version__,
+                                                                  pypaper.MINIMUM_VERSION))
+
+
+def new_research_project(initials):
+    print("building research project")
+    root_folder_full_path = PROJECT_ROOT_FULL_PATH
+    project_name = PROJECT_NAME
+
+    print(folder_path, initials)
+    gt.build_base_folders(root_folder_full_path, initials)
+    lt.build_base_folders(root_folder_full_path, project_name, initials, author="")
+    pyt.build_base_folders(root_folder_full_path, initials)
+    gt.add_to_gitignore(root_folder_full_path, initials)
+    gt.add_to_requirements_txt(root_folder_full_path)
     pass
 
 
@@ -45,19 +65,14 @@ if __name__ == "__main__":
     folder_path = get_script_path()
 
     # start the program
-    if arg1 in ["paper", "chapter"]:
-        try:
-            title = sys.argv[2]
-        except IndexError:
-            console_help()
-            sys.exit(1)
-        if len(sys.argv) < 4:
+    if arg1 in ["init"]:
+        if len(sys.argv) < 3:
             # prompt user
             initials = "ni"
             pass
         else:
-            initials = sys.argv[3]
-        new_paper(folder_path, title, initials)
+            initials = sys.argv[2]
+        new_research_project(initials)
     elif arg1 == "short-bib":
         try:
             latex_ffp = sys.argv[2]

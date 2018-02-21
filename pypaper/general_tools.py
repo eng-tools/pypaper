@@ -16,24 +16,20 @@ def build_folder(ffp, name):
         print("%s folder already exists" % name)
 
 
-def build_base_folders(base_path, root_folder_name, initials):
+def build_base_folders(root_folder_full_path, initials):
     """
     Creates the project folders
 
-    :param base_path:
-    :param root_folder_name:
+    :param root_folder_full_path:
     :param initials:
     :return:
     """
-    # Create the project root folder
-    project_path = "%s%s/" % (base_path, root_folder_name)
-    build_folder(project_path, "Base")
     # Create the project temporary output folder
-    build_folder(project_path + "temp/", "Temporary")
+    build_folder(root_folder_full_path + "temp/", "Temporary")
     # Create the project module data output folder
-    data_path = "%s%s_data/" % (project_path, initials)
+    data_path = "%s%s_data/" % (root_folder_full_path, initials)
     build_folder(data_path, "Project data")
-    return project_path
+    return root_folder_full_path
 
 
 def get_template_ffp(template_name):
@@ -66,7 +62,7 @@ def template_to_folder(template_name, folder_path):
     ofile.close()
 
 
-def add_to_gitignore(base_path, initials):
+def add_to_gitignore(root_folder_full_path, initials):
     """
     Add a list of files that should not be tracked by git
 
@@ -86,12 +82,12 @@ def add_to_gitignore(base_path, initials):
                  "%s-paper/%s-paper.pdf" % (initials, initials),
                  "temp/*"
                  ]
-    a = open(base_path + ".gitignore", "a")
+    a = open(root_folder_full_path + ".gitignore", "a")
     a.write("\n" + "\n".join(to_ignore))
     a.close()
 
 
-def add_to_requirements_txt(project_root_folder):
+def add_to_requirements_txt(root_folder_full_path):
     """
     Adds python packages used in project
 
@@ -103,6 +99,6 @@ def add_to_requirements_txt(project_root_folder):
                  "engformat"
 
                  ]
-    a = open(project_root_folder + "requirements.txt", "a")
+    a = open(root_folder_full_path + "requirements.txt", "a")
     a.write("\n" + "\n".join(to_ignore))
     a.close()
