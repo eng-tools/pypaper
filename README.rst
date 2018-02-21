@@ -1,22 +1,22 @@
-.. image:: https://travis-ci.org/eng-tools/paper_tools.svg?branch=master
-   :target: https://travis-ci.org/eng-tools/paper_tools
+.. image:: https://travis-ci.org/eng-tools/pypaper.svg?branch=master
+   :target: https://travis-ci.org/eng-tools/pypaper
    :alt: Testing Status
 
-.. image:: https://img.shields.io/pypi/v/paper_tools.svg
-   :target: https://pypi.python.org/pypi/paper_tools
+.. image:: https://img.shields.io/pypi/v/pypaper.svg
+   :target: https://pypi.python.org/pypi/pypaper
    :alt: PyPi version
 
-.. image:: https://coveralls.io/repos/github/eng-tools/paper_tools/badge.svg
-   :target: https://coveralls.io/github/eng-tools/paper_tools
+.. image:: https://coveralls.io/repos/github/eng-tools/pypaper/badge.svg
+   :target: https://coveralls.io/github/eng-tools/pypaper
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://github.com/eng-tools/paper_tools/blob/master/LICENSE
+    :target: https://github.com/eng-tools/pypaper/blob/master/LICENSE
     :alt: License
 
 
-###########
-paper_tools
-###########
+#######
+pypaper
+#######
 
 A Python package to speed up the writing of papers by automating various aspects of research writing
 
@@ -26,18 +26,22 @@ How to use
 
 Copy the manage.py file into the directory above where you will write the paper
 
-No existing folder for paper
-############################
+Generate a paper or chapter project
+###################################
 
-If the base folder for your paper doesn't exist
+From the directory where you want the project folder to be created (or already exists)
 
-run:
-`python manage.py new-paper <paper name>`
+For new paper run:
+`python manage.py paper <paper name> <optional: initials>`
+
+For new chapter run:
+`python manage.py chapter <paper name> <optional: initials>`
 
 Follow the prompts.
 
-Existing folder for paper 
-#########################
+
+Generate a small bib-tex file
+#############################
 
 run:
-`python manage.py new-paper <folder name>`
+`short-bib <latex file path> <large bibtex path> <optional: new bibtex path>`
