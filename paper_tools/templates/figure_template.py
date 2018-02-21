@@ -1,12 +1,11 @@
-import numpy as np
 import matplotlib.pyplot as plt
 from bwplot import cbox
-####USERPATH###
+import all_paths as ap
 from engformat import plot_tools as efpt
 from engformat import plot as efp
 from engformat import plot_outputs as efpo
-from matplotlib import font_manager
-font_prop = font_manager.FontProperties(size=7)
+
+font_prop = {'size': 9}
 
 
 def create(save=0, show=0):
@@ -25,9 +24,9 @@ def create(save=0, show=0):
     name = name.split("figure_")[-1]
     extension = ""
     if save == 1:
-        efpo.save_figure(up, bf, name, save=save, extension=extension)
+        efpo.save_figure(ap, bf, name, save=save, extension=extension)
     elif save == 2:
-        print(efpo.save_figure(up, bf, name, save=save, latex=False))  # publish
+        print(efpo.save_figure(ap, bf, name, save=save, latex=False))  # publish
     if show:
         plt.show()
 

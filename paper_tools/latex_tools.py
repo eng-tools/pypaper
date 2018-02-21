@@ -4,7 +4,7 @@ import bibtexparser
 from paper_tools import general_tools as gt
 
 
-def build_base(base_path, fullname, initials, author=""):
+def build_base_folders(base_path, root_folder_name, initials, author=""):
     # Create folder for latex work
     latex_path = "%s%s_paper/" % (base_path, initials)
     gt.build_folder(latex_path, "Latex")
@@ -21,7 +21,7 @@ def build_base(base_path, fullname, initials, author=""):
     a = open(template_ffp)
     f_str = a.read()
     a.close()
-    f_str = f_str.replace("###TITLE###", fullname)
+    f_str = f_str.replace("###TITLE###", root_folder_name)
     f_str = f_str.replace("###AUTHOR###", author)
     # Add example .svg file into latex
     latex_file_name = "%s-paper.tex" % initials

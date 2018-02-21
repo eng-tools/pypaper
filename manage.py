@@ -8,11 +8,11 @@ from paper_tools import py_tools as pyt
 
 def new_paper(folder_path, title, initials):
     print("building new paper")
-    fullname = title + "-paper"
+    root_folder_name = title + "-paper"
     print(folder_path, title, initials)
-    base_path = gt.build_base(folder_path, fullname)
-    lt.build_base(base_path, fullname, initials, author="")
-    pyt.build_base(base_path, fullname, initials, author="")
+    base_path = gt.build_base_folders(folder_path, root_folder_name, initials)
+    lt.build_base_folders(base_path, root_folder_name, initials, author="")
+    pyt.build_base_folders(base_path, initials)
     gt.add_to_gitignore(base_path, initials)
     pass
 
@@ -32,7 +32,7 @@ def build_new_bibtex(latex_ffp, big_bibtex_ffp, new_bibtex_ffp='new_bibtex.bib')
 
 def console_help():
     print("Usage: python manage.py <option> <args>")
-    print("Options: new-paper <name>")
+    print("Options: paper <name>")
 
 if __name__ == "__main__":
     try:
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     folder_path = get_script_path()
 
     # start the program
-    if arg1 == "new-paper":
+    if arg1 == "paper":
         try:
             title = sys.argv[2]
         except IndexError:
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         else:
             initials = sys.argv[3]
         new_paper(folder_path, title, initials)
-    if arg1 == "short-bib":
+    elif arg1 == "short-bib":
         try:
             latex_ffp = sys.argv[2]
             big_bibtex_ffp = sys.argv[3]

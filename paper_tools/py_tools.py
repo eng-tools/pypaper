@@ -1,28 +1,38 @@
 from paper_tools import general_tools as gt
 
 
-def build_base(base_path, fullname, initials, author=""):
+def add_init_file(folder_path):
+    new_file = open(folder_path + "__init__.py", "w")
+    new_file.close()
+
+
+def build_base_folders(base_path, initials):
     # Create folder for latex work
     py_path = "%s%s_scripts/" % (base_path, initials)
     gt.build_folder(py_path, "Python")
+
     # Create images folder and figures folder
     outputs_path = "%soutputs/" % py_path
     gt.build_folder(outputs_path, "Python outputs")
-    figures_path = "%stemp-output/" % py_path
-    gt.build_folder(figures_path, "Temp output")
-    # TODO: Add toolkit folder, where users can put motion load files and soil profile load files.
+    add_init_file(outputs_path)
+
+    # Create project tools folder
+    tools_path = "%stools/" % py_path
+    gt.build_folder(tools_path, "Python tools")
+    add_init_file(tools_path)
+
+    # Create project research folder
+    research_path = "%sresearch/" % py_path
+    gt.build_folder(research_path, "Python research")
+    add_init_file(research_path)
 
     # Copy figure template file into location
     fname = 'figure_template.py'
-    template_ffp = gt.get_template_ffp(fname)
-    a = open(template_ffp)
-    f_str = a.read()
-    a.close()
-    out_ffp = outputs_path + fname
-    ofile = open(out_ffp, "w")
-    ofile.write(f_str)
-    ofile.close()
-    # Add init file
-    out_ffp = outputs_path + "__init__.py"
-    ofile = open(out_ffp, "w")
-    ofile.close()
+    gt.template_to_folder(fname, outputs_path)
+
+
+
+def add_project_python_files(project_root_folder):
+    fname = 'all_paths.py'
+    gt.template_to_folder(fname, project_root_folder)
+    pass
