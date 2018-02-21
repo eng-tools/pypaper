@@ -1,2 +1,2 @@
-bibtexparser>=0.6.2
+bibtexparser==0.6.2
 regex
