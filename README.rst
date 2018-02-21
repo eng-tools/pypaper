@@ -32,12 +32,14 @@ Generate a paper or chapter project
 From the directory where you want the project folder to be created (or already exists)
 
 For new paper run:
-    .. code:: bash
-    $python manage.py paper <paper name> <optional: initials>
+.. code:: bash
+
+    $ python manage.py paper <paper name> <optional: initials>
 
 For new chapter run:
-    .. code:: bash
-    python manage.py chapter <paper name> <optional: initials>
+.. code:: bash
+
+    $ python manage.py chapter <paper name> <optional: initials>
 
 Follow the prompts.
 
@@ -46,7 +48,8 @@ Generate a small bib-tex file
 #############################
 
 run:
-`short-bib <latex file path> <large bibtex path> <optional: new bibtex path>`
+
+``$ short-bib <latex file path> <large bibtex path> <optional: new bibtex path>``
 
 
 
@@ -69,6 +72,7 @@ Tutorial: A new research paper
 ------------------------------
 
 Definitions list:
+#################
 
 papers_dir:
     The folder that contains your research papers.
@@ -78,19 +82,21 @@ initials:
     This should be the initials of the research name (usually two characters).
 project_root_folder_name:
     The name of the root folder of your new research paper "<short_research_name>-paper"
-main_bibtex_file: The bibtex file that contains all of your references.
+main_bibtex_file:
+    The bibtex file that contains all of your references.
 
 Steps:
+######
 
 1. Install pypaper
-    .. code:: bash
+.. code:: bash
 
     $ pip install pypaper
 
-2. Create a new repository called "<project_root_folder_name>" on Bitbucket or Github with a README file.
+2. Create a new repository called ``<project_root_folder_name>`` on Bitbucket or Github with a README file.
 
 3. Clone the folder to your papers directory
-    .. code:: bash
+.. code:: bash
 
     $ cd <papers_dir>
     $ git clone <clone-url>
@@ -100,7 +106,7 @@ Steps:
 
     $ python -m pypaper.init_project
 
-5. Change the current directory to <project_root_folder_name>.
+5. Change the current directory to ``<project_root_folder_name>``.
     .. code:: bash
     $ cd <project_root_folder_name>
 
