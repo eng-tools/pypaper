@@ -1,9 +1,9 @@
 import os
 import sys
 
-from paper_tools import general_tools as gt
-from paper_tools import latex_tools as lt
-from paper_tools import py_tools as pyt
+from pypaper import general_tools as gt
+from pypaper import latex_tools as lt
+from pypaper import py_tools as pyt
 
 
 def new_paper(folder_path, title, initials):

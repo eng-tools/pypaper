@@ -1,5 +1,5 @@
 import os
-import paper_tools
+import pypaper
 
 
 def build_folder(ffp, name):
@@ -43,7 +43,7 @@ def get_template_ffp(template_name):
     :param template_name:
     :return:
     """
-    templates_dir = os.path.join(os.path.dirname(paper_tools.__file__), 'templates')
+    templates_dir = os.path.join(os.path.dirname(pypaper.__file__), 'templates')
     template_file = os.path.join(templates_dir, template_name)
     return template_file
 

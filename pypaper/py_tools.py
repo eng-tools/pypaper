@@ -1,4 +1,4 @@
-from paper_tools import general_tools as gt
+from pypaper import general_tools as gt
 
 
 def add_init_file(folder_path):

@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
-setup(name='paper_tools',
-      version='0.1.0',
+setup(name='pypaper',
+      version='0.1.1',
       description='A command line tool to aid the writing of research papers',
-      url='https://github.com/eng-tools/paper_tools',  # The URL to the github repo
+      url='https://github.com/eng-tools/pypaper',  # The URL to the github repo
       author='Maxim Millen',
       author_email='mmi46@uclive.ac.nz',
       license='MIT',

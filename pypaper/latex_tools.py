@@ -1,7 +1,7 @@
 import os
-import paper_tools
+import pypaper
 import bibtexparser
-from paper_tools import general_tools as gt
+from pypaper import general_tools as gt
 
 
 def build_base_folders(base_path, root_folder_name, initials, author=""):

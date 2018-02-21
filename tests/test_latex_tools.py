@@ -1,5 +1,5 @@
 import os
-from paper_tools import latex_tools as lt
+from pypaper import latex_tools as lt
 
 test_dir = os.path.dirname(__file__)
 
