@@ -48,8 +48,9 @@ Generate a small bib-tex file
 #############################
 
 run:
+.. code:: bash
 
-``$ short-bib <latex file path> <large bibtex path> <optional: new bibtex path>``
+    $ short-bib <latex file path> <large bibtex path> <optional: new bibtex path>
 
 
 
@@ -62,10 +63,22 @@ Project folders and files
         - *Note: all parameters should by written in UPPER_CASE_WITH_UNDERSCORES*
     - all_paths.py: This contains you paths to different folders that are specific to the project
     - user_paths.py: This contains paths that are specific to the user's computer
-    - sr_data/: This folder contains data specific to the project
-        - Note:
-
-TODO: Explain each folder and file
+    - requirements.txt: A list of python packages used in the research
+    - .gitignore: A list of files and folders that should not be tracked by git
+    - <initials>_data/: This folder contains data specific to the project
+        - Note: Only include small non-binary files here that can be easily tracked with git,
+        for large data files use another storage (e.g. Google Drive/Dropbox/OneDrive) and link the folder using
+        ``user_paths.py``
+    - <initials>_scripts/: This folder contains all the python files used for research, and generating outputs
+        - outputs/:
+            - figure_<name-of-figure>.py: This file is used to build a figure for your research paper
+            - table_<name-of-figure>.py: This file is used to build a table for your research paper
+        - tools/: This folder contains scripts and functions that are specific to your project but used in many files
+        - research/: This folder contains scripts that used to generate data for your research
+    - <initials>_paper/: This folder contains the research paper as a latex document
+        - <initials>-paper.tex/: The main latex document
+        - <initials>-figures/: Figures that are data generated, the ``PUBLICATION_FIGURE_PATH`` in ``all_paths.py``
+        - <initials>-images/: Non-data generated files, e.g. drawings
 
 
 Tutorial: A new research paper
@@ -102,38 +115,37 @@ Steps:
     $ git clone <clone-url>
 
 4. Add the pypaper manager.py file to your project
-    .. code:: bash
+.. code:: bash
 
     $ python -m pypaper.init_project
 
 5. Change the current directory to ``<project_root_folder_name>``.
-    .. code:: bash
+.. code:: bash
+
     $ cd <project_root_folder_name>
 
 6. Create the project folders
-    .. code:: bash
+.. code:: bash
+
     $ python manage.py paper <initials>
 
 7. Add new folders to git repository
-    .. code:: bash
+.. code:: bash
 
     $ git add .
     $ git commit -m "Added pypaper project files"
     $ git push
 
-8. Create a new figure, copy the 'figure_template.py' # TODO: add clt
+8. Create a new figure, copy the ``figure_template.py`` # TODO: add clt
 
-7. Only save .svg files, non-binary files
-
-## deploy a sample project to github for the blog
+9. Add to generate_all.py
 
 
 
-copy the templates and create a figure or run `python new figure <name>`
 
 copy a table template file and create a table
 
-add to generate all
+
 
 add to requirements.txt file
 
