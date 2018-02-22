@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 from bwplot import cbox
 import all_paths as ap
-from engformat import plot_tools as efpt
-from engformat import plot as efp
-from engformat import plot_outputs as efpo
+import engformat as ef
+import settings as ops
 
 font_prop = {'size': 9}
 
@@ -16,17 +15,18 @@ def create(save=0, show=0):
     subplot.set_xlabel('Period [s]')
     # subplot.set_xscale('log')
     subplot.set_ylabel('Disp. Response [m]')
-    efp.xy(subplot, x_origin=True, y_origin=True)
-    efpt.revamp_legend(subplot, loc="upper left", prop=font_prop)
+    ef.xy(subplot, x_origin=True, y_origin=True)
+    ef.revamp_legend(subplot, loc="upper left", prop=font_prop)
 
     bf.tight_layout()
     name = __file__.replace('.py', '')
     name = name.split("figure_")[-1]
     extension = ""
-    if save == 1:
-        efpo.save_figure(ap, bf, name, save=save, extension=extension)
-    elif save == 2:
-        print(efpo.save_figure(ap, bf, name, save=save, latex=False))  # publish
+    if save == 2:
+        ef.save_figure(ap, bf, name, publish=True, name_ext=extension, ftype=ops.PUBLICATION_FILE_TYPE,
+                       latex=False, dpi=ops.PUBLICATION_DPI)
+    elif save == 1:
+        ef.save_figure(ap, bf, name, name_ext="")
     if show:
         plt.show()
 

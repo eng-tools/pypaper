@@ -155,3 +155,6 @@ the pip freeze
 then copy contents back into requirements.txt with the exact version numbers.
 
 Commit and push the project.
+
+$ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+
