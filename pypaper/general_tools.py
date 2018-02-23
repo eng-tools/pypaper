@@ -96,7 +96,7 @@ def add_to_requirements_txt(root_folder_full_path):
     """
     to_ignore = ["matplotlib",
                  "bwplot",
-                 "engformat"
+                 "engformat>=0.1.3"
 
                  ]
     a = open(root_folder_full_path + "requirements.txt", "a")
