@@ -98,8 +98,8 @@ project_root_folder_name:
 main_bibtex_file:
     The bibtex file that contains all of your references.
 
-Steps:
-######
+Setup Steps:
+############
 
 1. Install pypaper
 .. code:: bash
@@ -136,25 +136,55 @@ Steps:
     $ git commit -m "Added pypaper project files"
     $ git push
 
-8. Create a new figure, copy the ``figure_template.py`` # TODO: add clt
 
-9. Add to generate_all.py
+Steps to create a new figure
+############################
+
+8. Copy the ``figure_template.py`` and rename it the name of your new figure with the prefix "figure_"
+ e.g. "figure_beam_deflections_under_load.py" # TODO: add clt
+
+9. Replace the code for plotting a figure ``subplot.plot([0], [0], label="", c=cbox(0))``. Note that ``cbox`` is a line
+colour iterator, where you specific an integer and it returns a colour. Useful for plotting two lines in the same colour.
+You can learn more about it here: https://github.com/eng-tools/bwplot
+
+10. Update the publication settings ``PUBLICATION_FILE_TYPE`` and ``PUBLICATION_DPI``, which correspond to the image
+type and the dots-per-inch as specified by the conference/journal/book.
+
+11. When run the new figure script you will generate a new figure in the images folder call the same as the figure
+script name, e.g. "beam_deflections_under_load.eps".
+
+12. Add to the script to generate_all.py
+
+Steps to create a new table
+###########################
+
+1. copy a table template file
+
+2. Load the object with the parameters
+
+3. Pass to XXXXX
 
 
+Steps to save the work state for sharing and re-running
+=======================================================
 
+1. Generate a new python virtual environment and activate it
 
-copy a table template file and create a table
+.. code:: bash
+    brew install pyenv
+    pyenv install 3.6.4
+    pyenv virtualenv 3.6.4 <virtual-env-name>
+    pyenv activate <virtual-env-name>
 
+2. Install dependencies ``pip install -r requirements.txt``
 
+3. Check that you can re-build all of your research, run ``python generate_all.py``, otherwise continue to add to
+requirements.txt, until you have all the required packages.
 
-add to requirements.txt file
+3. View the versions of the dependencies ``pip freeze``
 
-create a pyenv and run pip install -r requirements.txt
+4. Copy the output back into requirements.txt with the exact version numbers.
 
-the pip freeze
-then copy contents back into requirements.txt with the exact version numbers.
+5. Commit and push the project.
 
-Commit and push the project.
-
-$ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 
