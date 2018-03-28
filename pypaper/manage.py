@@ -1,7 +1,5 @@
-import os
 import sys
 import os
-
 
 # from pypaper import MIMUMUM_VERSION
 import pypaper
@@ -9,7 +7,7 @@ from pypaper import general_tools as gt
 from pypaper import latex_tools as lt
 from pypaper import py_tools as pyt
 
-__project_pypaper_version__ = "0.2.1"  # version that project was built with
+__project_pypaper_version__ = "0.2.6"  # version that project was built with
 PROJECT_ROOT_FULL_PATH = os.path.dirname(os.path.abspath(__file__)) + "/"
 PROJECT_NAME = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 

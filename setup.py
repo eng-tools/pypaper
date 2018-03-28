@@ -1,7 +1,11 @@
 from setuptools import setup, find_packages
 
+about = {}
+with open("pypaper/__about__.py") as fp:
+    exec(fp.read(), about)
+
 setup(name='pypaper',
-      version='0.2.5',
+      version=about['__version__'],
       description='A command line tool to aid the writing of research papers',
       url='https://github.com/eng-tools/pypaper',  # The URL to the github repo
       author='Maxim Millen',
