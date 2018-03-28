@@ -52,8 +52,8 @@ def build_new_bibtex(latex_ffp, big_bibtex_ffp, new_bibtex_ffp='new_bibtex.bib')
 
 def console_help():
     print("Usage: python manage.py <option> <args>")
-    print("Options: paper <name> <optional: initials>")
-    print("         chapter <name> <optional: initials>")
+    print("Options: init <optional: initials>")
+    print("         init <optional: initials>")
     print("         short-bib <latex file path> <large bibtex path> <optional: new bibtex path>")
 
 if __name__ == "__main__":

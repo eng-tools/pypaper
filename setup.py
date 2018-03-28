@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='pypaper',
-      version='0.2.3',
+      version='0.2.4',
       description='A command line tool to aid the writing of research papers',
       url='https://github.com/eng-tools/pypaper',  # The URL to the github repo
       author='Maxim Millen',
@@ -15,7 +15,9 @@ setup(name='pypaper',
           'Programming Language :: Python :: 3',
       ],
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-      install_requires=[],
+      install_requires=[
+          "bibtexparser==0.6.2"
+      ],
       keywords="research latex",
       # List additional groups of dependencies here (e.g. development
       # dependencies). You can install these using the following syntax,

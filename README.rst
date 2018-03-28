@@ -114,20 +114,20 @@ Setup Steps:
     $ cd <papers_dir>
     $ git clone <clone-url>
 
-4. Add the pypaper manager.py file to your project
-.. code:: bash
-
-    $ python -m pypaper.init_project
-
-5. Change the current directory to ``<project_root_folder_name>``.
+4. Change the current directory to ``<project_root_folder_name>``.
 .. code:: bash
 
     $ cd <project_root_folder_name>
 
+5. Add the pypaper manager.py file to your project
+.. code:: bash
+
+    $ python -m pypaper.init_project
+
 6. Create the project folders
 .. code:: bash
 
-    $ python manage.py paper <initials>
+    $ python manage.py init <initials>
 
 7. Add new folders to git repository
 .. code:: bash
