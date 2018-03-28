@@ -29,6 +29,11 @@ def build_base_folders(root_folder_full_path, initials):
     # Create the project module data output folder
     data_path = "%s%s_data/" % (root_folder_full_path, initials)
     build_folder(data_path, "Project data")
+    # Copy template files into location
+    fname = 'settings.py'
+    template_to_folder(fname, root_folder_full_path)
+    fname = 'all_paths.py'
+    template_to_folder(fname, root_folder_full_path)
     return root_folder_full_path
 
 
