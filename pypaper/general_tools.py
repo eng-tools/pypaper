@@ -34,6 +34,8 @@ def build_base_folders(root_folder_full_path, initials):
     template_to_folder(fname, root_folder_full_path)
     fname = 'all_paths.py'
     template_to_folder(fname, root_folder_full_path)
+    fname = 'user_paths.py'
+    template_to_folder(fname, root_folder_full_path)
     return root_folder_full_path
 
 

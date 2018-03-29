@@ -3,9 +3,6 @@ from pypaper import latex_tools as lt
 
 test_dir = os.path.dirname(__file__)
 
-def test_latex_build():
-    pass
-
 
 def test_compile_bibtex():
     ffp = test_dir + "/test_data_files/sample.bib"
