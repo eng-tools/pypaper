@@ -1,1 +1,1 @@
-include pypaper/templates/*
+include pypaper/templates/base-paper.tex
