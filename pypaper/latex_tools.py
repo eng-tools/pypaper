@@ -130,7 +130,7 @@ def extract_citation_keys_from_latex(latex_ffp, chicago=True):
     :return:
     """
     citations = []
-    import regex
+
     import re
     a = open(latex_ffp)
     lines = a.readlines()
