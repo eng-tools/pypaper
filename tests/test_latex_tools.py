@@ -34,4 +34,4 @@ def test_extract_citations():
 
 
 if __name__ == '__main__':
-    test_extract_citations()
+    test_compile_bibtex()

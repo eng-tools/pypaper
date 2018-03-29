@@ -1,5 +1,4 @@
-import os
-import pypaper
+
 import bibtexparser
 from pypaper import general_tools as gt
 
@@ -96,7 +95,7 @@ def compile_bibtex(citations, big_bibtex_ffp):
     with open(big_bibtex_ffp) as org_bibtex_file:
         org_bibtex_database = bibtexparser.load(org_bibtex_file)
 
-    new_bibtex_db = bibtexparser.loads("")  # create a new bibtex DB obj
+    new_bibtex_db = bibtexparser.loads(" ")  # create a new bibtex DB obj
     for entry in citations:
         if entry not in org_bibtex_database.entries_dict:
             print("Not found: ", entry)
@@ -137,15 +136,15 @@ def extract_citation_keys_from_latex(latex_ffp, chicago=True):
     matches = []
     for line in lines:
 
-        matches += re.findall('\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-        matches += re.findall('\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-        matches += re.findall('\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         if chicago:
-            matches += re.findall('\\citeN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall('\\citeNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall('\\shortcite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall('\\shortciteN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall('\\shortciteNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\citeN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\citeNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortcite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortciteN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortciteNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
 
     for m in matches:
         new_cite = m[0]
