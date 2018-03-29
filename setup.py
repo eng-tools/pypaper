@@ -22,6 +22,7 @@ setup(name='pypaper',
       install_requires=[
           "bibtexparser==0.6.2"
       ],
+      include_package_data=True,  # need to include files listed in MANIFEST.in
       keywords="research latex",
       # List additional groups of dependencies here (e.g. development
       # dependencies). You can install these using the following syntax,
