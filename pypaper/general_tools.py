@@ -33,7 +33,8 @@ def build_base_folders(root_folder_full_path, initials):
     fname = 'settings.py'
     template_to_folder(fname, root_folder_full_path)
     fname = 'all_paths.py'
-    template_to_folder(fname, root_folder_full_path)
+    ap_replacements = {"###INITIALS###": initials}
+    template_to_folder(fname, root_folder_full_path, ap_replacements)
     fname = 'user_paths.py'
     template_to_folder(fname, root_folder_full_path)
     return root_folder_full_path
@@ -51,7 +52,7 @@ def get_template_ffp(template_name):
     return template_file
 
 
-def template_to_folder(template_name, folder_path):
+def template_to_folder(template_name, folder_path, replacements={}):
     """
     Copies a template into a folder
 
@@ -63,6 +64,8 @@ def template_to_folder(template_name, folder_path):
     a = open(template_ffp)
     f_str = a.read()
     a.close()
+    for key in replacements:
+        f_str = f_str.replace(key, replacements[key])
     out_ffp = folder_path + template_name
     ofile = open(out_ffp, "w")
     ofile.write(f_str)
