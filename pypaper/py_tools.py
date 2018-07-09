@@ -20,6 +20,8 @@ def build_base_folders(root_folder_full_path, initials):
     tools_path = "%stools/" % py_path
     gt.build_folder(tools_path, "Python tools")
     add_init_file(tools_path)
+    fname = 'fig_functions.py'
+    gt.template_to_folder(fname, tools_path)
 
     # Create project research folder
     research_path = "%sresearch/" % py_path
@@ -28,8 +30,8 @@ def build_base_folders(root_folder_full_path, initials):
 
     # Copy figure template file into location
     fname = 'figure_template.py'
-    gt.template_to_folder(fname, outputs_path)
-
+    ft_replacements = {"###INITIALS###": initials}
+    gt.template_to_folder(fname, outputs_path, ft_replacements)
 
 
 def add_project_python_files(project_root_folder):

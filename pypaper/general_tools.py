@@ -27,7 +27,7 @@ def build_base_folders(root_folder_full_path, initials):
     # Create the project temporary output folder
     build_folder(root_folder_full_path + "temp/", "Temporary")
     # Create the project module data output folder
-    data_path = "%s%s_data/" % (root_folder_full_path, initials)
+    data_path = "%sdata/" % root_folder_full_path
     build_folder(data_path, "Project data")
     # Copy template files into location
     fname = 'settings.py'
@@ -90,7 +90,8 @@ def add_to_gitignore(root_folder_full_path, initials):
                  "%s_scripts/matplotlibrc" % initials,
                  "*TSWLatexianTemp_*",
                  "%s-paper/%s-paper.pdf" % (initials, initials),
-                 "temp/*"
+                 "temp/*",
+                 "venv/"
                  ]
     a = open(root_folder_full_path + ".gitignore", "a")
     a.write("\n" + "\n".join(to_ignore))

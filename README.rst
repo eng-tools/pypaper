@@ -65,7 +65,7 @@ Project folders and files
     - user_paths.py: This contains paths that are specific to the user's computer
     - requirements.txt: A list of python packages used in the research
     - .gitignore: A list of files and folders that should not be tracked by git
-    - <initials>_data/: This folder contains data specific to the project
+    - data/: This folder contains data specific to the project
         - Note: Only include small non-binary files here that can be easily tracked with git,
         for large data files use another storage (e.g. Google Drive/Dropbox/OneDrive) and link the folder using
         ``user_paths.py``

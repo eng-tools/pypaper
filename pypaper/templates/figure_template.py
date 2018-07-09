@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 from bwplot import cbox
-import all_paths as ap
 import engformat as ef
-import settings as ops
 
-font_prop = {'size': 9}
+from ###INITIALS###_scripts.tools import fig_functions as ff
+import all_paths as ap
+
+import settings as ops
 
 
 def create(save=0, show=0):
@@ -16,17 +17,16 @@ def create(save=0, show=0):
     # subplot.set_xscale('log')
     subplot.set_ylabel('Disp. Response [m]')
     ef.xy(subplot, x_origin=True, y_origin=True)
-    ef.revamp_legend(subplot, loc="upper left", prop=font_prop)
+    ef.revamp_legend(subplot, loc="upper left", prop={'size': 9})
 
     bf.tight_layout()
     name = __file__.replace('.py', '')
     name = name.split("figure_")[-1]
     extension = ""
-    if save == 2:
-        ef.save_figure(ap, bf, name, publish=True, name_ext=extension, ftype=ops.PUBLICATION_FILE_TYPE,
-                       latex=False, dpi=ops.PUBLICATION_DPI)
-    elif save == 1:
-        ef.save_figure(ap, bf, name, name_ext="")
+    if save:
+        bf.savefig(ap.PUB_FIG_PATH + name + extension + ops.PUB_FIG_FILE_TYPE, dpi=ops.PUB_FIG_DPI)
+        if ops.PUB_DOCUMENT_TYPE == "latex":
+            ff.latex_for_figure(ap, name=ap.PUB_FIG_PATH + name + extension, ftype=ops.PUB_FIG_FILE_TYPE)
     if show:
         plt.show()
 

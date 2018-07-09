@@ -3,11 +3,11 @@ import os
 initials = "###INITIALS###"
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) + "/"
-PUBLICATION_PATH = ROOT_DIR + "%s_paper/" % initials
-FIGURE_FOLDER = "%s-figures/" % initials
-PUBLICATION_FIGURE_PATH = PUBLICATION_PATH + FIGURE_FOLDER
-TEMP_FIGURE_PATH = ROOT_DIR + "temp/"
-MODULE_DATA_PATH = ROOT_DIR + "%s_data/" % initials
+PUB_PATH = ROOT_DIR + "%s_paper/" % initials
+FIG_FOLDER = "%s-figures" % initials
+PUB_FIG_PATH = PUB_PATH + FIG_FOLDER + "/"  # TODO: change to PUB_FIGURE_PATH
+TEMP_FIG_PATH = ROOT_DIR + "temp/"
+MODULE_DATA_PATH = ROOT_DIR + "data/"  # no initials, consistent with python science environment from PyCharm
 
 # add project specific paths here
 
