@@ -58,9 +58,8 @@ def find_equations(fn):
 
 def combine_bibtex(bibtex_ffp1, bibtex_ffp2):
     """
-    Reads a latex file and extracts the cite keys then finds
-     the references in a large bibtex file and writes a new bibtex file
-     with just the required references.
+    Merges to bibtex files
+
     :param ffp:
     :return:
     """
@@ -139,6 +138,7 @@ def extract_citation_keys_from_latex(latex_ffp, chicago=True):
         matches += re.findall(r'\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         matches += re.findall(r'\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         matches += re.findall(r'\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citep\[e.g.\]\[\]\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
         if chicago:
             matches += re.findall(r'\\citeN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
             matches += re.findall(r'\\citeNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
@@ -152,6 +152,20 @@ def extract_citation_keys_from_latex(latex_ffp, chicago=True):
             citations.append(new_cite)
 
     return citations
+
+
+def small_bibtex_str(latex_ffp, full_bibtex_ffp):
+    """
+    Reads a latex file and extracts the cite keys then finds
+     the references in a large bibtex file and writes a new bibtex file
+     with just the required references.
+
+    :return:
+    """
+    citations = extract_citation_keys_from_latex(latex_ffp=latex_ffp)
+
+    bstr = compile_bibtex(citations, full_bibtex_ffp)
+    return bstr
 
 
 if __name__ == '__main__':
