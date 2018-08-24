@@ -147,9 +147,11 @@ def extract_citation_keys_from_latex(latex_ffp, chicago=True):
             matches += re.findall(r'\\shortciteNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
 
     for m in matches:
-        new_cite = m[0]
-        if new_cite not in citations:
-            citations.append(new_cite)
+        for new_cite in m:
+            if new_cite == "":
+                continue
+            if new_cite not in citations:
+                citations.append(new_cite)
 
     return citations
 
