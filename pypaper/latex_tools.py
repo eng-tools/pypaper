@@ -89,7 +89,7 @@ def compile_bibtex(citations, big_bibtex_ffp):
     """
 
     remove_keys = ["annote", "date-added", "date-modified", "local-url", "file", "rating", "month", "uri", "read"
-                   "abstract"]
+                   "abstract", "read"]
 
     with open(big_bibtex_ffp) as org_bibtex_file:
         org_bibtex_database = bibtexparser.load(org_bibtex_file)

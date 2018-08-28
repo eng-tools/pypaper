@@ -10,7 +10,7 @@ import settings as ops
 
 def create(save=0, show=0):
 
-    bf, subplot = plt.subplots()
+    bf, subplot = plt.subplots(figsize=(ops.TWO_COL, 4))
     subplot.plot([0], [0], label="", c=cbox(0))
 
     subplot.set_xlabel('Period [s]')
@@ -26,7 +26,8 @@ def create(save=0, show=0):
     if save:
         bf.savefig(ap.PUB_FIG_PATH + name + extension + ops.PUB_FIG_FILE_TYPE, dpi=ops.PUB_FIG_DPI)
         if ops.PUB_DOCUMENT_TYPE == "latex":
-            ff.latex_for_figure(ap, name=ap.PUB_FIG_PATH + name + extension, ftype=ops.PUB_FIG_FILE_TYPE)
+            para = ef.latex_for_figure(ap, name=ap.PUB_FIG_PATH + name + extension, ftype=ops.PUB_FIG_FILE_TYPE)
+            print(para)
     if show:
         plt.show()
 
