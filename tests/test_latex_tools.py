@@ -35,12 +35,13 @@ def test_extract_citations():
 
 def test_extract_multi_citations():
     ffp = test_dir + "/test_data_files/sample_latex_w_eg_and_multiple.tex"
-    expected_citations = ['Vesic:1975', 'Chatzigogos:2008uv', 'Safak:1992ub', 'Raychowdhury:2009hw', "NIST:2013ssi"]
+    expected_citations = ['Vesic:1975', 'Chatzigogos:2008uv', 'Safak:1992ub', 'Raychowdhury:2009hw', "NIST:2013ssi",
+                          'Taylor:1979uc', 'Gajan:2008cs', 'Deng:2012ta']
     citations = lt.extract_citation_keys_from_latex(latex_ffp=ffp)
     print(citations)
     assert len(expected_citations) == len(citations)
     for ec in expected_citations:
-        assert ec in citations
+        assert ec in citations, ec
 
 
 if __name__ == '__main__':

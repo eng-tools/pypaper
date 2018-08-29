@@ -1,4 +1,4 @@
-
+import re
 import bibtexparser
 from pypaper import general_tools as gt
 
@@ -124,39 +124,48 @@ def compile_bibtex(citations, big_bibtex_ffp):
 def extract_citation_keys_from_latex(latex_ffp, chicago=True):
     """
     Reads a latex file and returns a list of cite keys used.
+
     :param latex_ffp: full file path to latex file
     :return:
     """
+    # \\cite\{([^\},]+)(?:,\s*([^\},]+))*\}
+    # \\cite\{ = match anything that starts with \cite{
+    # (  +) = creates a capture group
+    # [^\}] = do not match anything with "}"
+    #
+
     citations = []
 
-    import re
     a = open(latex_ffp)
     lines = a.readlines()
     matches = []
     for line in lines:
 
-        matches += re.findall(r'\\cite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-        matches += re.findall(r'\\citep\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-        matches += re.findall(r'\\citet\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-        matches += re.findall(r'\\citep\[e.g.\]\[\]\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\cite\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citep\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citet\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+        matches += re.findall(r'\\citep\[e.g.\]\[\]\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
         if chicago:
-            matches += re.findall(r'\\citeN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall(r'\\citeNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall(r'\\shortcite\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall(r'\\shortciteN\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
-            matches += re.findall(r'\\shortciteNP\{([^\},]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\citeN\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\citeNP\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortcite\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortciteN\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
+            matches += re.findall(r'\\shortciteNP\{([^\}]+)(?:,\s*([^\},]+))*\}', line)
 
     for m in matches:
         for new_cite in m:
+            new_cite = new_cite.replace(" ", "")
             if new_cite == "":
                 continue
-            if new_cite not in citations:
-                citations.append(new_cite)
+            cites = new_cite.split(",")
+            for single_cite in cites:
+                if single_cite not in citations:
+                    citations.append(single_cite)
 
     return citations
 
 
-def small_bibtex_str(latex_ffp, full_bibtex_ffp):
+def small_bibtex_str(latex_ffp, full_bibtex_ffp, sort=True, verbose=False):
     """
     Reads a latex file and extracts the cite keys then finds
      the references in a large bibtex file and writes a new bibtex file
@@ -165,17 +174,21 @@ def small_bibtex_str(latex_ffp, full_bibtex_ffp):
     :return:
     """
     citations = extract_citation_keys_from_latex(latex_ffp=latex_ffp)
+    if sort:
+        citations.sort()
+    if verbose:
+        for cite in citations:
+            print(cite)
+        print("Total number of citations: ", len(citations))
+    b_str = compile_bibtex(citations, full_bibtex_ffp)
+    return b_str
 
-    bstr = compile_bibtex(citations, full_bibtex_ffp)
-    return bstr
 
-
-if __name__ == '__main__':
-    ffp = "../tests/test_data_files/sample_latex.tex"
-    full_bibtex_ffp = "../tests/test_data_files/sample.bib"
-    citations = extract_citation_keys_from_latex(latex_ffp=ffp)
-    print(citations)
-
-    bstr = compile_bibtex(citations, full_bibtex_ffp)
-    print(bstr)
-
+# if __name__ == '__main__':
+#     ffp = "../tests/test_data_files/sample_latex.tex"
+#     full_bibtex_ffp = "../tests/test_data_files/sample.bib"
+#     citations = extract_citation_keys_from_latex(latex_ffp=ffp)
+#     print(citations)
+#
+#     bstr = compile_bibtex(citations, full_bibtex_ffp)
+#     print(bstr)
