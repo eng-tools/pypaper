@@ -33,6 +33,16 @@ def build_base_folders(root_folder_full_path, initials):
     ft_replacements = {"###INITIALS###": initials}
     gt.template_to_folder(fname, outputs_path, ft_replacements)
 
+    # Copy generate_bibtex_file file into location
+    fname = 'generate_bibtex_file.py'
+    ft_replacements = {"###INITIALS###": initials}
+    gt.template_to_folder(fname, outputs_path, ft_replacements)
+
+    # Copy pre-commit hook file into location
+    fname = 'pre-commit-hook.sh'
+    gt.template_to_folder(fname, root_folder_full_path)
+    print("Completed adding base folders")
+
 
 def add_project_python_files(project_root_folder):
     fname = 'all_paths.py'

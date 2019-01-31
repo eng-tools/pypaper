@@ -54,6 +54,7 @@ def console_help():
     print("         init <optional: initials>")
     print("         short-bib <latex file path> <large bibtex path> <optional: new bibtex path>")
 
+
 if __name__ == "__main__":
     try:
         arg1 = sys.argv[1]
