@@ -1,4 +1,6 @@
 from pypaper import general_tools as gt
+import os
+import stat
 
 
 def add_init_file(folder_path):
@@ -41,6 +43,9 @@ def build_base_folders(root_folder_full_path, initials):
     # Copy pre-commit hook file into location
     fname = 'pre-commit-hook.sh'
     gt.template_to_folder(fname, root_folder_full_path)
+    st = os.stat(root_folder_full_path + fname)
+    os.chmod(root_folder_full_path + fname, st.st_mode | stat.S_IEXEC)
+    # TODO: make this file executable
     print("Completed adding base folders")
 
 
