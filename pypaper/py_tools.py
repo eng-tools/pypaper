@@ -30,6 +30,11 @@ def build_base_folders(root_folder_full_path, initials):
     gt.build_folder(research_path, "Python research")
     add_init_file(research_path)
 
+    # Create project research folder
+    bd_path = "%sbuild_databases/" % py_path
+    gt.build_folder(bd_path, "Python build_databases")
+    add_init_file(bd_path)
+
     # Copy figure template file into location
     fname = 'figure_template.py'
     ft_replacements = {"###INITIALS###": initials}
@@ -41,10 +46,10 @@ def build_base_folders(root_folder_full_path, initials):
     gt.template_to_folder(fname, outputs_path, ft_replacements)
 
     # Copy pre-commit hook file into location
-    fname = 'pre-commit-hook.sh'
-    gt.template_to_folder(fname, root_folder_full_path)
-    st = os.stat(root_folder_full_path + fname)
-    os.chmod(root_folder_full_path + fname, st.st_mode | stat.S_IEXEC)
+    # fname = 'pre-commit-hook.sh'
+    # gt.template_to_folder(fname, root_folder_full_path)
+    # st = os.stat(root_folder_full_path + fname)
+    # os.chmod(root_folder_full_path + fname, st.st_mode | stat.S_IEXEC)
     # TODO: make this file executable
     print("Completed adding base folders")
 

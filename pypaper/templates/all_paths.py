@@ -14,3 +14,7 @@ MODULE_DATA_PATH = ROOT_DIR + "data/"  # no initials, consistent with python sci
 # import user_paths as up
 
 # import user specific paths here
+# if hasattr(up, 'EXTERNAL_DATABASE_PATH'):
+#     EXTERNAL_DATABASE_PATH = up.EXTERNAL_DATABASE_PATH
+# else:
+#     EXTERNAL_DATABASE_PATH = '<set-path-to-EXTERNAL_DATABASE_PATH>'
